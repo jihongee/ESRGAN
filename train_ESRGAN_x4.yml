@@ -10,8 +10,8 @@ datasets:
   train:
     name: DIV2K
     type: PairedImageDataset
-    dataroot_gt: datasets/DIV2K/DIV2K_train_HR_sub
-    dataroot_lq: datasets/DIV2K/DIV2K_train_LR_bicubic/X4_sub
+    dataroot_gt: /content/datasets/train/gt
+    dataroot_lq: /content/datasets/train/lq
     augment: true
     # (for lmdb)
     # dataroot_gt: datasets/DIV2K/DIV2K_train_HR_sub.lmdb
@@ -35,8 +35,8 @@ datasets:
   val:
     name: Set14
     type: PairedImageDataset
-    dataroot_gt: datasets/Set14/GTmod12
-    dataroot_lq: datasets/Set14/LRbicx4
+    dataroot_gt: /content/datasets/val/gt
+    dataroot_lq: /content/datasets/val/lq
     io_backend:
       type: disk
 

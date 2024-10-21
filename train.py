@@ -33,6 +33,10 @@ def create_train_val_dataloader(opt, logger):
         if phase == 'train':
             dataset_enlarge_ratio = dataset_opt.get('dataset_enlarge_ratio', 1)
             train_set = build_dataset(dataset_opt)
+
+            # 증강 옵션 반영
+            train_set.augment = dataset_opt.get('augment', False)  # 증강 옵션을 데이터셋에 적용
+            
             train_sampler = EnlargedSampler(train_set, opt['world_size'], opt['rank'], dataset_enlarge_ratio)
             train_loader = build_dataloader(
                 train_set,

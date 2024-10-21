@@ -3,7 +3,8 @@ import torch
 
 class ExosomeDataset(torch.utils.data.Dataset):
     def __init__(self, file_paths, transform=None):
-        file_paths = [
+        file_paths = ['datasets/240805_B2B_256x256_1-fit-2024.08.05-13.58.51.072_reference-force-height-measured-default.txt', 
+                    
         self.data = self.load_data(file_paths)
         self.transform = transform
 

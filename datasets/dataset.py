@@ -2,25 +2,20 @@ import numpy as np
 import torch
 
 class ExosomeDataset(torch.utils.data.Dataset):
-    def __init__(self, file_path, transform=None):
-        # file_path: 데이터 파일 경로
-        self.data = self.load_data(file_path)
+    def __init__(self, file_paths, transform=None):
+        file_paths = [
+        self.data = self.load_data(file_paths)
         self.transform = transform
 
-    def load_data(self, file_path):
-        # 텍스트 파일에서 데이터를 읽고 주석을 제거하는 전처리
-        data = []
-        with open(file_path, 'r') as file:
-            for line in file:
-                # 주석(#)으로 시작하는 줄은 무시
-                if line.startswith('#'):
-                    continue
-                # 숫자 데이터만 읽어들여서 float 리스트로 변환
-                numbers = [float(num) for num in line.split()]
-                data.append(numbers)
-        
-        # 2D numpy array로 변환
-        return np.array(data)
+    def load_data(self, file_paths):
+        # 여러 파일을 읽어 데이터를 합침
+        all_data = []
+        for file_path in file_paths:
+            data = np.loadtxt(file_path)
+            all_data.append(data)
+
+        # 리스트를 numpy 배열로 변환하여 반환
+        return np.concatenate(all_data, axis=0)
 
     def __len__(self):
         return len(self.data)

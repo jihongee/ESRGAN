@@ -56,7 +56,13 @@ class ExosomeDataset(torch.utils.data.Dataset):
         if self.augment:
             sample = self.augment_image(sample)
 
-        # 데이터에 추가적인 전처리 적용
+        # 데이터 크기 조정 (target_size로 resize)
+        sample = resize(sample, self.target_size)
+
+        # 단일 채널 이미지를 3채널로 확장
+        sample = np.stack([sample] * 3, axis=-1)  # (H, W) -> (H, W, 3)
+
+        # 추가적인 전처리 적용
         if self.transform:
             sample = self.transform(sample)
 

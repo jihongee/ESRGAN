@@ -37,6 +37,7 @@ datasets:
     type: PairedImageDataset
     dataroot_gt: /content/datasets/val/gt
     dataroot_lq: /content/datasets/val/lq
+    filename_tmpl: '{}-lq'
     io_backend:
       type: disk
 
